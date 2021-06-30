@@ -1,16 +1,18 @@
 const express = require('express')
 const router = express.Router()
-const { getPills, postPill, deletePills
-  , deletePill, getPill, patchPill } = require('../services/pillService')
+const { deleteOne, patchOne, getOne, getAll, createOne } = require('../services/factoryService')
+const { deletePills } = require('../services/pillService')
+
+const Pill = require('../models/pillModel')
 
 router.route('/')
-  .get(getPills)
-  .post(postPill)
+  .get(getAll(Pill))
+  .post(createOne(Pill))
   .delete(deletePills)
 
 router.route('/:id')
-  .get(getPill)
-  .patch(patchPill)
-  .delete(deletePill)
+  .get(getOne(Pill))
+  .patch(patchOne(Pill))
+  .delete(deleteOne(Pill))
 
 module.exports = router

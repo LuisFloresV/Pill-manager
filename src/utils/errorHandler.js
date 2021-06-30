@@ -21,7 +21,7 @@ const handleCastError = (err) => {
 }
 
 const handleDuplicateError = (err) => {
-  const message = `Duplicate field value: ${err.keyValue.name} Please use another value!`
+  const message = `Duplicate field value: ${Object.values(err.keyValue)} Please use another value!`
   return new AppError(message, 400)
 }
 
@@ -34,6 +34,5 @@ module.exports = (err, req, res, next) => {
   if (error.name === 'ValidationError') error = handleValidationError(error)
   if (error.name === 'CastError') error = handleCastError(error)
   if (error.code === 11000) error = handleDuplicateError(error)
-
   sendErrorProd(error, res)
 }
