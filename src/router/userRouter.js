@@ -13,15 +13,13 @@ router.route('/register')
   .post(registerUser)
 
 // PROTECTED WITH JWT STRATEGY
-router.use(passport.authenticate('jwt', { session: false }))
 router.route('/deactivate')
-  .post(deactivateUser)
+  .post(passport.authenticate('jwt', { session: false }), deactivateUser)
 
 router.route('/me')
-  .get(getMe)
+  .get(passport.authenticate('jwt', { session: false }), getMe)
 
 // PROTECTED WITH BASIC STRATEGY
-router.use(passport.authenticate('basic', { session: false }))
 router.route('/login')
   .post(passport.authenticate('basic', { session: false }), login)
 

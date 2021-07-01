@@ -14,7 +14,7 @@ const pillSchema = new mongoose.Schema({
     required: [true, 'Dose of the medicine must be specified'],
     trim: true,
     min: [1, 'Dose must be above 1 pill'],
-    max: [10, 'Dose must be below 1 pills']
+    max: [10, 'Dose must be below 11 pills']
   },
   frequency: {
     type: String,

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const pillRouter = require('./router/pillRouter')
@@ -6,6 +7,8 @@ const errorHandler = require('./utils/errorHandler')
 const passport = require('passport')
 const { error404 } = require('./middleware/404')
 
+const { mongoDb } = require('./utils/mongo')
+mongoDb.then(() => console.log('Connect to DB'))
 // JSON PARSER
 app.use(express.json())
 

@@ -26,7 +26,7 @@ exports.deleteOne = (Model) => catchAsync(async (req, res, next) => {
 })
 
 exports.patchOne = (Model) => catchAsync(async (req, res, next) => {
-  const data = await Model.findByOneAndUpdate({ _id: req.params.id, owner: req.user._id }, req.body, { new: true, runValidators: true })
+  const data = await Model.findOneAndUpdate({ _id: req.params.id, owner: req.user._id }, req.body, { new: true, runValidators: true })
   if (!data) return next(new AppError('No document with that ID', 404))
   success(res, 200, data)
 })
