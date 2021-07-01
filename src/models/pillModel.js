@@ -23,6 +23,10 @@ const pillSchema = new mongoose.Schema({
       values: ['4 hours', '6 hours', '8 hours', '12 hours', '24 hours'],
       message: 'Frequency is expressed in hours: 4 6 8 12 24 hours'
     }
+  },
+  owner: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
   }
 })
 

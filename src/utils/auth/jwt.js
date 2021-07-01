@@ -11,9 +11,8 @@ passport.use(
   },
     catchAsync(async function (tokenPayload, done) {
       const user = await User.findById(tokenPayload.id)
-      if (!user) {
-        return done(new AppError('Unauthorized', 401), false)
-      }
+      if (!user) return done(new AppError('Unauthorized', 401), false)
+      if (user.active === false) return done(new AppError('User not found', 404), false)
       delete user.password
       done(null, user)
     }
