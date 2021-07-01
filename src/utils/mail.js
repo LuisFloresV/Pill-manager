@@ -1,7 +1,7 @@
-// SEND WELCOME AND DEACTIVATION EMAILS
+// SEND EMAILS
 const nodemailer = require('nodemailer')
 
-const sendMail = async (options, type) => {
+const sendMail = async (options) => {
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
