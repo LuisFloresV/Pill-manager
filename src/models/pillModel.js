@@ -26,7 +26,8 @@ const pillSchema = new mongoose.Schema({
   },
   owner: {
     type: mongoose.Schema.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: [true, 'An user needs to register a new medicine!']
   }
 })
 

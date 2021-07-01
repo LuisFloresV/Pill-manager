@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { getMe, deactivateUser } = require('../services/userService')
-const { login, registerUser } = require('../services/authService')
+const { getMe } = require('../services/userService')
+const { login, registerUser, deactivateUser } = require('../services/authService')
 
 const passport = require('passport')
 
@@ -12,12 +12,16 @@ require('../utils/auth/jwt')
 router.route('/register')
   .post(registerUser)
 
+// PROTECTED WITH JWT STRATEGY
+router.use(passport.authenticate('jwt', { session: false }))
 router.route('/deactivate')
-  .post(passport.authenticate('jwt', { session: false }), deactivateUser)
+  .post(deactivateUser)
 
 router.route('/me')
-  .get(passport.authenticate('jwt', { session: false }), getMe)
+  .get(getMe)
 
+// PROTECTED WITH BASIC STRATEGY
+router.use(passport.authenticate('basic', { session: false }))
 router.route('/login')
   .post(passport.authenticate('basic', { session: false }), login)
 
